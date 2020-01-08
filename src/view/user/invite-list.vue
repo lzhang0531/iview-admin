@@ -25,69 +25,73 @@
 </template>
 
 <script>
-  import { TablePage } from '_c/tables'
-  import { getInvitePage} from '@/api/data'
+import { TablePage } from '_c/tables'
+import { getInvitePage } from '@/api/data'
 
-  export default {
-    name: 'movie_type_page',
-    components: {
-      TablePage,
+export default {
+  name: 'movie_type_page',
+  components: {
+    TablePage
+  },
+  data () {
+    return {
+      invitedMonthPick: new Date(),
+      invitedMonth: '',
+      pageNum: 1,
+      pageSize: 10,
+      loading: false,
+      memberDate: '',
+      memberAreaCode: '',
+      memberId: '',
+      columns: [
+        {
+          title: '序号',
+          type: 'index',
+          width: 70,
+          align: 'center'
+        },
+        { title: '用户名', key: 'userName' },
+        { title: '邀请码', key: 'invitationCode' },
+        { title: '邀请数', key: 'amount' }
+      ],
+      tableData: {}
+    }
+  },
+  methods: {
+    dateFormat (date) {
+      this.invitedMonth = date
     },
-    data () {
-      return {
-        invitedMonthPick: new Date(),
-        invitedMonth: '',
-        pageNum: 1,
-        pageSize: 10,
-        loading: false,
-        memberDate: '',
-        memberAreaCode: '',
-        memberId: '',
-        columns: [
-          {
-            title: '序号',
-            type: 'index',
-            width: 70,
-            align: 'center',
-          },
-          {title: '用户名', key: 'userName'},
-          {title: '邀请码', key: 'invitationCode'},
-          {title: '邀请数', key: 'amount'},
-        ],
-        tableData: {},
+    handleSearch () {
+      let data = {
+        pageNum: this.pageNum,
+        pageSize: this.pageSize
       }
+      this.invitedMonth !== '' && (data.invitedMonth = this.invitedMonth)
+      this.getTableDatas(data)
     },
-    methods: {
-      dateFormat(date){
-        this.invitedMonth=date;
-      },
-      handleSearch () {
-        let data = {
-          pageNum: this.pageNum,
-          pageSize: this.pageSize
-        }
-        this.invitedMonth !== '' && (data.invitedMonth = this.invitedMonth)
-        this.getTableDatas(data)
-      },
-      changePage (currPage, pagesize) {
-        this.pageNum = currPage
-        this.pageSize = pagesize
-        this.handleSearch()
-      },
-      getTableDatas (condition) {
-        this.loading = true
-        getInvitePage(condition).then(res => {
-          this.loading = false
-          if (res.data.res === 0) {
-            this.tableData = res.data.data
-          }
-        })
-      }
-    },
-    created () {
+    changePage (currPage, pagesize) {
+      this.pageNum = currPage
+      this.pageSize = pagesize
       this.handleSearch()
     },
+    getTableDatas (condition) {
+      this.loading = true
+      getInvitePage(condition).then(res => {
+        this.loading = false
+        if (res.data.res === 0) {
+          this.tableData = res.data.data
+        }
+      })
+    }
+  },
+  created () {
+    let date = new Date()
+    let month = date.getMonth() + 1
+    month = '0' + month
+    this.invitedMonth = date.getFullYear() + '-' + month
+    this.handleSearch()
   }
+}
 </script>
 <style>
   .pd-6r {

@@ -7,6 +7,11 @@ import { setToken, getToken, canTurnTo, setTitle } from '@/libs/util'
 import config from '@/config'
 const { homeName } = config
 
+const originalPush = Router.prototype.push
+Router.prototype.push = function push (location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 Vue.use(Router)
 const router = new Router({
   base: '/dist/',
@@ -52,7 +57,6 @@ router.beforeEach((to, from, next) => {
     } */
   }
 })
-
 router.afterEach(to => {
   setTitle(to, router.app)
   iView.LoadingBar.finish()
