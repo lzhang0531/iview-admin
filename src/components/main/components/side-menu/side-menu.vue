@@ -110,5 +110,5 @@ export default {
 }
 </script>
 <style lang="less">
-@import './side-menu.less';
+@import 'side-menu.less';
 </style>

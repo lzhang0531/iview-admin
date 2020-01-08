@@ -111,5 +111,5 @@ export default {
 }
 </script>
 <style lang="less">
-@import './paste-editor.less';
+@import 'paste-editor.less';
 </style>

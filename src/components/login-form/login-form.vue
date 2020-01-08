@@ -1,14 +1,14 @@
 <template>
   <Form ref="loginForm" :model="form" :rules="rules" @keydown.enter.native="handleSubmit">
-    <FormItem prop="userName">
-      <Input v-model="form.userName" placeholder="请输入用户名">
+    <FormItem prop="loginName">
+      <Input v-model="form.loginName" placeholder="请输入用户名">
         <span slot="prepend">
           <Icon :size="16" type="ios-person"></Icon>
         </span>
       </Input>
     </FormItem>
-    <FormItem prop="password">
-      <Input type="password" v-model="form.password" placeholder="请输入密码">
+    <FormItem prop="loginPassword">
+      <Input type="password" v-model="form.loginPassword" placeholder="请输入密码">
         <span slot="prepend">
           <Icon :size="14" type="md-lock"></Icon>
         </span>
@@ -23,7 +23,7 @@
 export default {
   name: 'LoginForm',
   props: {
-    userNameRules: {
+    loginNameRules: {
       type: Array,
       default: () => {
         return [
@@ -31,7 +31,7 @@ export default {
         ]
       }
     },
-    passwordRules: {
+    loginPasswordRules: {
       type: Array,
       default: () => {
         return [
@@ -43,16 +43,16 @@ export default {
   data () {
     return {
       form: {
-        userName: 'super_admin',
-        password: ''
+        loginName: '',
+        loginPassword: ''
       }
     }
   },
   computed: {
     rules () {
       return {
-        userName: this.userNameRules,
-        password: this.passwordRules
+        loginName: this.loginNameRules,
+        loginPassword: this.loginPasswordRules
       }
     }
   },
@@ -61,8 +61,8 @@ export default {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.$emit('on-success-valid', {
-            userName: this.form.userName,
-            password: this.form.password
+            loginName: this.form.loginName,
+            loginPassword: this.form.loginPassword
           })
         }
       })

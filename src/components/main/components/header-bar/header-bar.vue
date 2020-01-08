@@ -8,8 +8,8 @@
   </div>
 </template>
 <script>
-import siderTrigger from './sider-trigger'
-import customBreadCrumb from './custom-bread-crumb'
+import siderTrigger from './sider-trigger/index'
+import customBreadCrumb from './custom-bread-crumb/index'
 import './header-bar.less'
 export default {
   name: 'HeaderBar',

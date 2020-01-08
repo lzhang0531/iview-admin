@@ -1,5 +1,5 @@
 <style lang="less">
-  @import './login.less';
+  @import 'login.less';
 </style>
 
 <template>
@@ -8,7 +8,6 @@
       <Card icon="log-in" title="欢迎登录" :bordered="false">
         <div class="form-con">
           <login-form @on-success-valid="handleSubmit"></login-form>
-          <p class="login-tip">输入任意用户名和密码即可</p>
         </div>
       </Card>
     </div>
@@ -27,13 +26,18 @@ export default {
       'handleLogin',
       'getUserInfo'
     ]),
-    handleSubmit ({ userName, password }) {
-      this.handleLogin({ userName, password }).then(res => {
-        this.getUserInfo().then(res => {
+    handleSubmit ({ loginName, loginPassword }) {
+      this.handleLogin({ loginName, loginPassword }).then(res => {
+        if (res.data.res !== 0) {
+          this.$Message.error(res.data.msg)
+        } else {
           this.$router.push({
             name: this.$config.homeName
           })
-        })
+          /*    this.getUserInfo().then(res => {
+
+          }) */
+        }
       })
     }
   }

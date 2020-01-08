@@ -23,5 +23,5 @@ export default {
 }
 </script>
 <style lang="less">
-@import './sider-trigger.less';
+@import 'sider-trigger.less';
 </style>

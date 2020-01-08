@@ -1,2 +1,4 @@
 import Tables from './tables.vue'
-export default Tables
+import TablePage from './table-page.vue'
+
+export { Tables, TablePage }

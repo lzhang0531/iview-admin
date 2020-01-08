@@ -13,7 +13,7 @@ const resolve = dir => {
 // 需要将它改为'/my-app/'
 // iview-admin线上演示打包路径： https://file.iviewui.com/admin-dist/
 const BASE_URL = process.env.NODE_ENV === 'production'
-  ? '/'
+  ? '/movieManage/'
   : '/'
 
 module.exports = {
@@ -24,6 +24,7 @@ module.exports = {
   // sub-path here. For example, if your app is deployed at
   // https://www.foobar.com/my-app/
   // then change this to '/my-app/'
+  outputDir: 'movieManage',
   baseUrl: BASE_URL,
   // tweak internal webpack configuration.
   // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
@@ -40,4 +41,26 @@ module.exports = {
   // devServer: {
   //   proxy: 'localhost:3000'
   // }
+/*  devServer: {
+    overlay: {
+      warnings: false,
+      errors: false
+    },
+    proxy: {
+      '/manage': {
+        target: 'http://47.111.232.212:9090',
+        changeOrigin: true, // 是否跨域
+        pathRewrite: {
+          '^/manage': ''
+        }
+      },
+      '/file': { // 这里最好有一个 /
+        target: 'http://47.111.232.212', // 后台接口域名
+        changeOrigin: true // 是否跨域
+      },
+      '/mock': {
+        target: 'https://www.easy-mock.com/mock/5add9213ce4d0e69998a6f51/iview-admin/'
+      }
+    }
+  } */
 }

@@ -1,4 +1,4 @@
-import Clipboard from 'clipboard'
+import Clipboard from '@/directive/module/clipboard'
 export default {
   bind: (el, binding) => {
     const clipboard = new Clipboard(el, {

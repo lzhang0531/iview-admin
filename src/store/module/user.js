@@ -1,6 +1,5 @@
 import {
   login,
-  logout,
   getUserInfo,
   getMessage,
   getContentByMsgId,
@@ -74,16 +73,17 @@ export default {
   },
   actions: {
     // 登录
-    handleLogin ({ commit }, { userName, password }) {
-      userName = userName.trim()
+    handleLogin ({ commit }, { loginName, loginPassword }) {
+      loginPassword = loginPassword.trim()
       return new Promise((resolve, reject) => {
         login({
-          userName,
-          password
+          loginName,
+          loginPassword
         }).then(res => {
-          const data = res.data
-          commit('setToken', data.token)
-          resolve()
+          if (res.data.res === 0) {
+            commit('setToken', Math.round())
+          }
+          resolve(res)
         }).catch(err => {
           reject(err)
         })
@@ -92,13 +92,14 @@ export default {
     // 退出登录
     handleLogOut ({ state, commit }) {
       return new Promise((resolve, reject) => {
-        logout(state.token).then(() => {
-          commit('setToken', '')
-          commit('setAccess', [])
-          resolve()
+        /*        logout(state.token).then(() => {
+
         }).catch(err => {
           reject(err)
-        })
+        }) */
+        commit('setToken', '')
+        commit('setAccess', [])
+        resolve()
         // 如果你的退出登录无需请求接口，则可以直接使用下面三行代码而无需使用logout调用接口
         // commit('setToken', '')
         // commit('setAccess', [])
