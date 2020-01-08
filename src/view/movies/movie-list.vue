@@ -150,6 +150,7 @@ export default {
                   click: () => {
                     Object.assign(this.modalData, params.row)
                     this.modalData.areaCode = this.modalData.areaCode.toString()
+                    this.modalData.payFlag = this.modalData.payFlag.toString()
                     this.editModel = true
                   }
                 }
