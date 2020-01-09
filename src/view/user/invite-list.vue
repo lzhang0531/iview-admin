@@ -52,7 +52,8 @@ export default {
         },
         { title: '用户名', key: 'userName' },
         { title: '邀请码', key: 'invitationCode' },
-        { title: '邀请数', key: 'amount' }
+        { title: '邀请数', key: 'amount' },
+        { title: '付费数', key: 'payAmount' }
       ],
       tableData: {}
     }
